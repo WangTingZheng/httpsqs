@@ -1,5 +1,7 @@
 # HTTPSQS
 
+HTTPSQS is based on HTTP GET/POST protocol open source simple message queue service, Use Tokyo Cabinet's B+Tree Key/Value database to do data persistence storage。
+
 ## Prepare
 
 - openssl: OpenSSL 1.1.1f  31 Mar 2020
@@ -91,8 +93,8 @@ httpsqs -d -p 1218 -x /data0/queue
 
 put `你好，https` into queue
 ```shell
-GET: curl "http://localhost:1218/?name=your_queue_name&opt=put&data=C%E8%AF%AD%E8%A8%80&auth=mypass123"
-POST: curl -d "C%E8%AF%AD%E8%A8%80" "http://localhost:1218/?name=your_queue_name&opt=put&auth=mypass123"
+GET: curl "http://localhost:1218/?name=your_queue_name&opt=put&data=%E4%BD%A0%E5%A5%BD%EF%BC%8Chttpsqs&auth=mypass123"
+POST: curl -d "%E4%BD%A0%E5%A5%BD%EF%BC%8Chttpsqs" "http://localhost:1218/?name=your_queue_name&opt=put&auth=mypass123"
 ```
 if put successfully, will get `HTTPSQS_PUT_OK`
 ### get data
@@ -102,7 +104,7 @@ get `你好，httpsqs` into queue
 GET: curl "http://localhost:1218/?charset=utf-8&name=your_queue_name&opt=get&auth=mypass123"
 POST: curl "http://localhost:1218/?charset=gb2312&name=your_queue_name&opt=get&auth=mypass123"
 ```
-if get successfully, will get `HTTPSQS_GET_OK`
+if get successfully, will show `你好，httpsqs`
 
 ### stop httpsqs
 
@@ -115,15 +117,9 @@ PS: DO NOT USE `pkill -9 httpsqs` or `kill -9 httpsqs` to aviod lost unsaved dat
 - [Httpsqs的安装以及安装过程错误的解决方法 转](https://www.cnblogs.com/jami918/p/3569743.html)
 - [基于HTTP协议的轻量级开源简单队列服务：HTTPSQS](http://zyan.cc/httpsqs/)
 
-```
-HTTPSQS（HTTP Simple Queue Service）
-============================================
+## develop log
 
-HTTPSQS is based on HTTP GET/POST protocol open source simple message queue service, Use Tokyo Cabinet's B+Tree Key/Value database to do data persistence storage。
-
-Note: Author of the project is Zhang Yan. Encountered some problems in learning to use the process, and made adjustments. Involving software belongs to original author, the following is the original access address:
-
-Website：http://code.google.com/p/httpsqs/
-Document：http://blog.zyan.cc/httpsqs/
-Document API for Tokyo Cabinet's B+Tree: http://linux.die.net/man/3/tcbdb
-```
+2021.1.8
+- fork this rep
+- install httpsqs into wsl
+- add more detail in readme
